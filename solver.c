@@ -4,12 +4,12 @@
 #include "solver.h"
 
 // Helper to check if a word matches the feedback given a guess
-bool is_consistent(const char *word, const char *guess, const FeedbackType *feedback) {
-    FeedbackType temp_feedback[WORD_LENGTH];
-    get_feedback(word, guess, temp_feedback);
+bool is_consistent(const char *word, const char *guess, const FeedbackType *expected_feedback) {
+    FeedbackType actual_feedback[WORD_LENGTH];
+    get_feedback(guess, word, actual_feedback);
     
     for (int i = 0; i < WORD_LENGTH; i++) {
-        if (temp_feedback[i] != feedback[i]) return false;
+        if (actual_feedback[i] != expected_feedback[i]) return false;
     }
     return true;
 }
@@ -128,3 +128,4 @@ void solve_game(const char *target_word, const Dictionary *dict) {
 
     free(candidates);
 }
+
